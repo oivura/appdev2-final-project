@@ -11,14 +11,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Authentication routes
 Route::post('register', [UserAuthController::class, 'register']);
 Route::post('login', [UserAuthController::class, 'login']);
 Route::post('logout', [UserAuthController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::apiResource('users', UserController::class);
+// Route for creating fake user
+Route::get('create-fake-user', [UserController::class, 'createFakeUser']);
 
+// Grouped API resource routes that require authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('articles', ArticleController::class);
     Route::apiResource('comments', CommentController::class);
-    
 });
+
+// User routes
+Route::apiResource('users', UserController::class);

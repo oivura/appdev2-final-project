@@ -35,5 +35,11 @@ class UserController extends Controller
         User::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
-}
 
+    // Add a new method to generate a fake user
+    public function createFakeUser()
+    {
+        $user = User::factory()->create();
+        return response()->json($user, 201);
+    }
+}

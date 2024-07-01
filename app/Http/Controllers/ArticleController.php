@@ -58,7 +58,6 @@ class ArticleController extends Controller
         return response()->json($article);
     }
    
-   
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
